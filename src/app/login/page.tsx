@@ -15,7 +15,7 @@ export default function Page() {
   // useFormState
   // action과 initialState(기존 폼 작업 함수와 초기 상태)를 인자로 받고, state와 dispatch(폼에서 사용하는 새 작업과 최신 폼 상태)를 반환한다
   // <form action={}>에 dispatch를 주입
-
+//
   return (
     <div className='min-h-screen flex flex-col'>
       <div className='flex h-10 shrink-0 items-end rounded-lg bg-blue-400 p-4 mb-4 text-center text-xl font-semibold text-white md:h-10'>
@@ -32,7 +32,7 @@ export default function Page() {
           )}
           <label>
             나이 :
-            <input type='text' name='age' placeholder='나이를 입력해 주세요' />
+            <input type='number' name='age' placeholder='나이를 입력해 주세요' />
           </label>
           {state?.errors?.age && (
             <div className='mt-1 text-sm text-red-500'>{state.errors.age}</div>
@@ -107,6 +107,97 @@ export default function Page() {
               </div>
             )}
           </label>
+          <div className='mt-4 flex flex-col'>
+            <p>약관동의:</p>
+            <div className='mt-1 flex items-center'>
+              <label className='mr-4 flex items-center'>
+                <input type='radio' name='agree' value='Y' className='mr-1' />
+                동의
+              </label>
+              <label className='flex items-center'>
+                <input type='radio' name='agree' value='N' className='mr-1' />
+                동의하지 않음
+              </label>
+            </div>
+            {state.errors?.agree && (
+              <div className='mt-1 text-sm text-red-500'>
+                {state.errors.agree}
+              </div>
+            )}
+          </div>
+          <div className='mt-4 flex flex-col'>
+            <p>체크박스(다중선택):</p>
+            <div className='flex space-x-4'>
+              <label className='flex items-center'>
+                <input
+                  type='checkbox'
+                  name='check'
+                  value='soccer'
+                  className='mr-1'
+                />
+                축구
+              </label>
+              <label className=' flex items-center'>
+                <input
+                  type='checkbox'
+                  name='check'
+                  value='baseball'
+                  className='mr-1'
+                />
+                야구
+              </label>
+              <label className=' flex items-center'>
+                <input
+                  type='checkbox'
+                  name='check'
+                  value='basketball'
+                  className='mr-1'
+                />
+                농구
+              </label>
+              <label className='flex items-center'>
+                <input
+                  type='checkbox'
+                  name='check'
+                  value='tenis'
+                  className='mr-1'
+                />
+                테니스
+              </label>
+              <label className='flex items-center'>
+                <input
+                  type='checkbox'
+                  name='check'
+                  value='etc'
+                  className='mr-1'
+                />
+                기타
+              </label>
+            </div>
+            {state.errors?.check && (
+              <div className='mt-1 text-sm text-red-500'>
+                {state.errors.check}
+              </div>
+            )}
+          </div>
+          <div className='mt-4 flex space-x-4'>
+            <p>select:</p>
+            <div className='mt-1 flex items-center'>
+              <select name='select'>
+                <option value='' hidden />
+                <option value='none'>없음</option>
+                <option value='1'>1 ~ 2회</option>
+                <option value='2'>3 ~ 4회</option>
+                <option value='3'>5 ~ 6회</option>
+                <option value='4'>7회 이상</option>
+              </select>
+            </div>
+            {state.errors?.select && (
+              <div className='mt-1 text-sm text-red-500'>
+                {state.errors.select}
+              </div>
+            )}
+          </div>
           <div className='mt-6 flex w-full justify-end'>
             <button
               type='submit'
@@ -120,3 +211,4 @@ export default function Page() {
     </div>
   );
 }
+ 

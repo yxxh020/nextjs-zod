@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-// CSR(Client Side Rendering) 
+// CSR(Client Side Rendering)
 // 동작방식: 사용자가 페이지에 접근하면 서버에서 최소한의 HTML 파일을 보내주고
 // 브라우저에서 js를 실행해 화면을 렌더링해주는 방식
 // 장점: 사용자 경험이 좋다. 새로운 html을 받아오는 것이 아니라 필요한 부분만 업데이트 되기 때문에 다른 페이지 이동이 빠르고 깜박거림 없음
@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <main className='flex min-h-screen flex-col p-6'>
       <div className='flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 text-4xl font-semibold text-white md:h-52'>
-        Softnet
+        Next.js
       </div>
       <div className='mt-4 flex grow flex-col gap-4 md:flex-row'>
         <div className='flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20'>
@@ -43,6 +43,12 @@ export default function Home() {
             className='flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base'
           >
             <span>로그인</span>
+          </Link>
+          <Link
+            href='/login2'
+            className='flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base'
+          >
+            <span>로그인(react hook form)</span>
           </Link>
         </div>
         <div className='flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12'></div>

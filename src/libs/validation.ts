@@ -38,7 +38,7 @@ export const loginIdSchema = () =>
         type: 'string',
         minimum: 1,
         inclusive: true,
-        message: '아이디를 입력해 주세요.',
+        message: '아이디를 입력해 주세요',
       });
       return; // 검증 실패하면 멈춤
     }
@@ -48,19 +48,23 @@ export const loginIdSchema = () =>
     if (result.code === 200) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: '이미 사용중인 아이디 입니다.',
+        message: '이미 사용중인 아이디 입니다',
       });
       return;
     }
   });
 
 export const nameSchema = () =>
-  z.string().min(1, { message: '이름을 입력해 주세요.' });
+  z.string().min(1, { message: '이름을 입력해 주세요' });
 
+// export const ageSchema = () =>
+//   z.number({
+//     required_error: 'required', // 필수입력값 에러
+//     // invalid_type_error: '타입에러',
+//   });
 export const ageSchema = () =>
-  z.number({
-    required_error: '나이를 입력해 주세요.', // 필수입력값 에러
-  });
+  //z.coerce 특정 타입으로 자동 변환
+  z.coerce.number().positive({ message: '나이를 입력해 주세요' });
 
 export const emailSchema = () =>
   z.string().email({ message: '유효한 이메일 주소를 입력해 주세요' });
@@ -103,7 +107,7 @@ export const passwordSchema = () =>
         type: 'string',
         minimum: 8,
         inclusive: true,
-        message: '비밀번호는 최소 8자리 이상이어야 합니다.',
+        message: '비밀번호는 최소 8자리 이상이어야 합니다',
       });
       return; // 검증 실패하면 멈춤
     }
@@ -114,16 +118,59 @@ export const passwordSchema = () =>
     if (!regex.test(value)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: '비밀번호는 소문자, 숫자, 특수문자의 조합이어야 합니다.',
+        message: '비밀번호는 소문자, 숫자, 특수문자의 조합이어야 합니다',
       });
       return; // 검증 실패하면 멈춤
     }
   });
 
+//radio
 export const agreeSchema = () =>
-  z.enum(['Y', 'N']).refine((val) => val === 'Y', {
-    message: '약관에 동의해 주세요.',
+  //zod enum은 min  속성이 없기 때문에 ErrorMap 사용해서 에러메세지 커스텀
+
+  z.enum(['Y', 'N'], {
+    errorMap: () => ({ message: '동의 여부를 선택해 주세요' }),
+    //zodIssueCode에 따라 메세지 커스텀 가능
+    // invalid_type: "invalid_type";
+    // invalid_literal: "invalid_literal";
+    // custom: "custom";
+    // invalid_union: "invalid_union";
+    // invalid_union_discriminator: "invalid_union_discriminator";
+    // invalid_enum_value: "invalid_enum_value";
+    // unrecognized_keys: "unrecognized_keys";
+    // invalid_arguments: "invalid_arguments";
+    // invalid_return_type: "invalid_return_type";
+    // invalid_date: "invalid_date";
+    // invalid_string: "invalid_string";
+    // too_small: "too_small";
+    // too_big: "too_big";
+    // invalid_intersection_types: "invalid_intersection_types";
+    // not_multiple_of: "not_multiple_of";
+    // not_finite: "not_finite";
+
+    // errorMap: (issue, ctx) => {
+    //   if (issue.code == z.ZodIssueCode.invalid_type) {
+    //     return { message: '동의 여부를 선택해 주세요' };
+    //   } else {
+    //     return { message: ctx.defaultError };
+    //   }
+    // },
   });
 
 export const passwordConfirmSchema = () =>
-  z.string().min(1, { message: '비밀번호 확인을 입력해 주세요.' });
+  z.string().min(1, { message: '비밀번호 확인을 입력해 주세요' });
+
+export const checkSchema = () =>
+  // z
+  //   .string({
+  //     errorMap: () => ({ message: '최소 하나의 스포츠를 선택해 주세요' }),
+  //   })
+  //   .array()
+  z
+    .array(z.string(), {
+      invalid_type_error: '최소 하나의 스포츠를 선택해 주세요',
+    })
+    .nonempty({ message: '최소 하나의 스포츠를 선택해 주세요' });
+
+export const selectSchema = () =>
+  z.string().min(1, { message: '옵션을 선택해 주세요' });

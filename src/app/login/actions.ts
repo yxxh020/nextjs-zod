@@ -21,12 +21,15 @@ export async function createUserAction(
 
     //safeParseAsyc: aka spa 비동기적 refine이나 transform을 사용하는 경우 await 사용해서 비동기적으로 수행
     name: formData.get('name'),
+    age: formData.get('age'),
     email: formData.get('email'),
     phone: formData.get('phone'),
     password: formData.get('password'),
     agree: formData.get('agree'),
     passwordConfirm: formData.get('passwordConfirm'),
     loginId: formData.get('loginId'),
+    check: formData.getAll('check'), //getAll사용해서 array data 받기
+    select: formData.get('select'),
   });
 
   if (!validatedFields.success) {

@@ -8,6 +8,8 @@ import {
   nameSchema,
   ageSchema,
   loginIdSchema,
+  checkSchema,
+  selectSchema,
 } from '../validation';
 // Zod
 // 클라이언트가 전송한 데이터의 유효성을 검증할 수 있는 라이브러리
@@ -18,7 +20,6 @@ import {
 // zod 스키마 정의
 // 데이터의 형태와 구조를 정의
 // z.obejct()를 사용해서 객체형태로 지정
-
 
 //검증할 데이터 스키마
 export const userSchema = z
@@ -31,6 +32,8 @@ export const userSchema = z
     password: passwordSchema(),
     agree: agreeSchema(),
     passwordConfirm: passwordConfirmSchema(),
+    check: checkSchema(),
+    select: selectSchema(),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     path: ['passwordConfirm'],
