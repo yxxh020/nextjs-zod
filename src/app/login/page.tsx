@@ -15,7 +15,7 @@ export default function Page() {
   // useFormState
   // action과 initialState(기존 폼 작업 함수와 초기 상태)를 인자로 받고, state와 dispatch(폼에서 사용하는 새 작업과 최신 폼 상태)를 반환한다
   // <form action={}>에 dispatch를 주입
-//
+
   return (
     <div className='min-h-screen flex flex-col'>
       <div className='flex h-10 shrink-0 items-end rounded-lg bg-blue-400 p-4 mb-4 text-center text-xl font-semibold text-white md:h-10'>
